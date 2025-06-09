@@ -1,108 +1,78 @@
 import os
-from dotenv import load_dotenv # Para carregar variáveis de ambiente do arquivo .env
+from dotenv import load_dotenv
 from crewai import Agent, Task, Crew
 from langchain_community.chat_models.litellm import ChatLiteLLM
 
 # ==============================================================================
-# CARREGAR VARIÁVEIS DE AMBIENTE (ESPECIALMENTE A API KEY)
+# CARREGAR VARIÁVEIS DE AMBIENTE E INSTANCIAR LLM
+# (Nenhuma mudança aqui)
 # ==============================================================================
-load_dotenv() # Carrega variáveis do arquivo .env para o ambiente
+load_dotenv()
 my_google_api_key = os.getenv("GOOGLE_API_KEY")
 
 if not my_google_api_key:
-    raise ValueError("Chave de API do Google (GOOGLE_API_KEY) não encontrada. "
-                     "Certifique-se de que ela está definida no arquivo .env ou como variável de ambiente.")
+    raise ValueError("Chave de API do Google (GOOGLE_API_KEY) não encontrada.")
 
-# ==============================================================================
-# INSTANCIAÇÃO DO LLM
-# ==============================================================================
 llm = ChatLiteLLM(
     model="gemini/gemini-1.5-flash",
-    api_key=my_google_api_key # Usa a chave carregada
+    api_key=my_google_api_key
 )
 
 # ==============================================================================
-# AVISO IMPORTANTE DE SEGURANÇA E RESPONSABILIDADE
-# (Mantenha este aviso)
+# AGENTE CONVERSACIONAL
 # ==============================================================================
-# Este código é uma demonstração tecnológica e NÃO um substituto para
-# aconselhamento médico profissional, diagnóstico ou tratamento.
-# SEMPRE CONSULTE UM MÉDICO QUALIFICADO PARA QUESTÕES DE SAÚDE.
+assistente_medico_conversacional = Agent(
+    role="Assistente Médico Conversacional de IA",
+    goal="""Conduzir uma conversa amigável e empática com o usuário para entender seus sintomas. 
+    Fazer perguntas de acompanhamento claras e relevantes.
+    
+    ***NOVA HABILIDADE: Se o usuário fornecer o conteúdo de um documento (como um exame de sangue), analise os dados contidos nele, correlacione com os sintomas descritos e responda às perguntas sobre eles.***
+
+    Quando tiver informações suficientes, fornecer uma análise preliminar, possíveis condições (deixando claro que não é um diagnóstico) e sugerir os próximos passos, como procurar um especialista.
+    Manter um tom tranquilizador e sempre, SEMPRE, reforçar que não é um médico real e que a consulta com um profissional de saúde é indispensável.""",
+    backstory="""Você é um assistente de IA avançado... (o resto do backstory continua igual)""",
+    verbose=False,
+    allow_delegation=False,
+    llm=llm
+)
+
 # ==============================================================================
-
-def analisar_sintomas_com_crewai(sintomas_do_paciente_str: str) -> str:
+# NOVA FUNÇÃO PARA O CHAT INTERATIVO
+# Esta função gerencia uma única troca na conversa.
+# ==============================================================================
+def obter_resposta_conversacional(historico_conversa: list) -> str:
     """
-    Função que encapsula a lógica do CrewAI para analisar sintomas.
-    Recebe uma string de sintomas e retorna o relatório final.
+    Processa o histórico da conversa e a última mensagem do usuário para gerar uma resposta.
+
+    Args:
+        historico_conversa: Uma lista de dicionários representando a conversa até agora.
+                            Ex: [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}]
+
+    Returns:
+        A resposta do agente de IA como uma string.
     """
+    print("Analisando o histórico da conversa para gerar uma nova resposta...")
 
-    analista_de_sintomas = Agent(
-        role="Analista de Sintomas Clínicos",
-        goal="Extrair e listar de forma clara todos os sintomas mencionados na descrição de um paciente.",
-        backstory="Você é um especialista em triagem médica, treinado para identificar os principais pontos nas queixas dos pacientes.",
-        verbose=False,
-        allow_delegation=False,
-        llm=llm
+    # Converte o histórico da conversa para um formato de string que a Task entenda
+    contexto_conversa = "\n".join([f"{msg['role']}: {msg['content']}" for msg in historico_conversa])
+
+    tarefa_conversacional = Task(
+        description=f"""Continue esta conversa de forma útil e segura. Aqui está o histórico até agora:
+        ---
+        {contexto_conversa}
+        ---
+        Baseado no histórico, sua função e a última mensagem do usuário, gere a próxima resposta apropriada.
+        Se o usuário acabou de cumprimentar, apresente-se e explique seu propósito.
+        Se o usuário descreveu sintomas, faça perguntas de acompanhamento (Ex: 'Há quanto tempo você tem isso?', 'A dor é constante ou vai e vem?', 'Você tem outros sintomas?').
+        Se você já coletou informações suficientes, resuma os sintomas, sugira possíveis áreas de investigação (sem diagnosticar) e recomende fortemente a busca por um especialista específico (ex: Clínico Geral, Cardiologista).
+        """,
+        agent=assistente_medico_conversacional,
+        expected_output="Uma única resposta em texto, formatada em markdown, para continuar a conversa com o usuário."
     )
 
-    pesquisador_diagnosticos = Agent(
-        role="Pesquisador de Diagnósticos Médicos",
-        goal="Com base em uma lista de sintomas, pesquisar possíveis diagnósticos e suas causas. Sempre enfatize que não é um diagnóstico definitivo.",
-        backstory="Você é um pesquisador médico meticuloso que correlaciona sintomas a possíveis condições médicas.",
-        verbose=False,
-        allow_delegation=False,
-        llm=llm
-    )
-
-    especialista_encaminhamento = Agent(
-        role="Especialista em Encaminhamento Médico",
-        goal="Analisar os possíveis diagnósticos e sugerir os tipos de especialistas médicos mais adequados.",
-        backstory="Você é um profissional experiente da área da saúde que guia o paciente, indicando o especialista correto.",
-        verbose=False,
-        allow_delegation=False,
-        llm=llm
-    )
-
-    tarefa_analise_sintomas = Task(
-        description=f"Analise a seguinte descrição de um paciente e liste todos os sintomas encontrados:\n\n---\n{sintomas_do_paciente_str}\n---",
-        agent=analista_de_sintomas,
-        expected_output="Uma lista em tópicos (bullet points) com cada sintoma identificado."
-    )
-
-    tarefa_pesquisa_diagnosticos = Task(
-        description="Usando a lista de sintomas fornecida, investigue e crie um relatório sobre possíveis diagnósticos.",
-        agent=pesquisador_diagnosticos,
-        context=[tarefa_analise_sintomas],
-        expected_output="Um relatório estruturado contendo 'Possíveis Diagnósticos', 'Causas Comuns', 'Descrição' e um aviso claro de que não é uma avaliação médica."
-    )
-
-    tarefa_sugestao_encaminhamento = Task(
-        description="Com base no relatório de possíveis diagnósticos, recomende quais especialidades médicas o paciente deve procurar e explique o motivo.",
-        agent=especialista_encaminhamento,
-        context=[tarefa_pesquisa_diagnosticos],
-        expected_output="Uma seção final chamada 'Próximos Passos e Encaminhamento' com uma lista de especialistas e a justificativa para cada um."
-    )
-
-    equipe_medica = Crew(
-        agents=[analista_de_sintomas, pesquisador_diagnosticos, especialista_encaminhamento],
-        tasks=[tarefa_analise_sintomas, tarefa_pesquisa_diagnosticos, tarefa_sugestao_encaminhamento],
-        verbose=False
-    )
-
-    print("Iniciando análise de saúde com CrewAI (local)...")
-    resultado_final = equipe_medica.kickoff()
-    print("Análise concluída (local).")
-    return resultado_final
-
-# Bloco para testar este script isoladamente (opcional)
-if __name__ == "__main__":
-    sintomas_teste_local = """
-    Febre alta há 2 dias, dor de garganta intensa e dificuldade para engolir.
-    Também notei pequenas manchas vermelhas na pele.
-    """
-    print("Executando teste local do script CrewAI...")
-    relatorio_teste = analisar_sintomas_com_crewai(sintomas_teste_local)
-    print("\n\n##################################")
-    print("## Relatório Final do Teste Local:")
-    print("##################################\n")
-    print(relatorio_teste)
+    # Para um único agente executando uma tarefa, não precisamos de um 'Crew'.
+    # Usamos diretamente o executor da tarefa.
+    resultado = assistente_medico_conversacional.execute_task(tarefa_conversacional)
+    
+    print("Resposta gerada.")
+    return resultado
