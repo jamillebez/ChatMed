@@ -1,12 +1,9 @@
 import os
 from dotenv import load_dotenv
-from crewai import Agent, Task, Crew
+from crewai import Agent, Task, Crew, Process
 from langchain_community.chat_models.litellm import ChatLiteLLM
 
-# ==============================================================================
 # CARREGAR VARIÁVEIS DE AMBIENTE E INSTANCIAR LLM
-# (Nenhuma mudança aqui)
-# ==============================================================================
 load_dotenv()
 my_google_api_key = os.getenv("GOOGLE_API_KEY")
 
@@ -18,61 +15,87 @@ llm = ChatLiteLLM(
     api_key=my_google_api_key
 )
 
-# ==============================================================================
-# AGENTE CONVERSACIONAL
-# ==============================================================================
-assistente_medico_conversacional = Agent(
-    role="Assistente Médico Conversacional de IA",
-    goal="""Conduzir uma conversa amigável e empática com o usuário para entender seus sintomas. 
-    Fazer perguntas de acompanhamento claras e relevantes.
-    
-    ***NOVA HABILIDADE: Se o usuário fornecer o conteúdo de um documento (como um exame de sangue), analise os dados contidos nele, correlacione com os sintomas descritos e responda às perguntas sobre eles.***
-
-    Quando tiver informações suficientes, fornecer uma análise preliminar, possíveis condições (deixando claro que não é um diagnóstico) e sugerir os próximos passos, como procurar um especialista.
-    Manter um tom tranquilizador e sempre, SEMPRE, reforçar que não é um médico real e que a consulta com um profissional de saúde é indispensável.""",
-    backstory="""Você é um assistente de IA avançado... (o resto do backstory continua igual)""",
-    verbose=False,
+# AGENTE 1: DIAGNÓSTICO
+agente_diagnostico = Agent(
+    role="IA de Suporte à Decisão para Diagnóstico Neurológico",
+    goal="""Analisar dados clínicos (anamnese, exame físico) para gerar um diagnóstico diferencial técnico, citando critérios relevantes (ex: DSM-5, CID-11, critérios de LINET) e estratificando as hipóteses por probabilidade para auxiliar o médico usuário.""",
+    backstory="""Você é um sistema de IA treinado com as mais recentes diretrizes e publicações em neurologia. Sua função é servir como uma ferramenta de consulta rápida para médicos, oferecendo um diferencial baseado em evidências para casos complexos.""",
+    verbose=True,
     allow_delegation=False,
     llm=llm
 )
 
-# ==============================================================================
-# NOVA FUNÇÃO PARA O CHAT INTERATIVO
-# Esta função gerencia uma única troca na conversa.
-# ==============================================================================
-def obter_resposta_conversacional(historico_conversa: list) -> str:
-    """
-    Processa o histórico da conversa e a última mensagem do usuário para gerar uma resposta.
+# AGENTE 2: EXAMES
+agente_exames = Agent(
+    role="Consultor de IA para Exames de Neuroimagem e Neurofisiologia",
+    goal="""Com base em um diagnóstico diferencial, sugerir e justificar um plano de workup com exames complementares. Detalhar a relevância clínica de cada exame (ex: 'RNM de encéfalo com contraste para avaliação de lesões desmielinizantes') para o caso em questão.""",
+    backstory="""Você é uma IA especialista em diretrizes de exames de imagem e testes neurológicos. Você auxilia médicos a escolherem o método de investigação mais custo-efetivo e com maior acurácia diagnóstica.""",
+    verbose=True,
+    allow_delegation=False,
+    llm=llm
+)
 
-    Args:
-        historico_conversa: Uma lista de dicionários representando a conversa até agora.
-                            Ex: [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}]
+# AGENTE 3: AVALIAÇÃO DE RISCO
+agente_risco = Agent(
+    role="IA para Estratificação de Risco Clínico e Urgência",
+    goal="""Realizar a estratificação de risco do caso clínico, destacando 'red flags' específicas. Classificar a urgência (eletiva, prioritária, emergência) com base em protocolos reconhecidos e justificar a classificação para o médico.""",
+    backstory="""Você é uma IA treinada em protocolos de triagem de emergência e modelos de predição de risco. Seu objetivo é alertar o médico sobre potenciais gravidades que exijam ação imediata.""",
+    verbose=True,
+    allow_delegation=False,
+    llm=llm
+)
 
-    Returns:
-        A resposta do agente de IA como uma string.
-    """
-    print("Analisando o histórico da conversa para gerar uma nova resposta...")
+# AGENTE 4: RELATOR FINAL
+agente_relator = Agent(
+    role="Assistente de IA para Geração de Sumário Clínico",
+    goal="""Sintetizar as análises dos agentes de diagnóstico, exames e risco em um sumário clínico estruturado e conciso. O formato deve ser adequado para uma rápida revisão por um profissional ou para inclusão em prontuário eletrônico.""",
+    backstory="""Você é uma IA especializada em documentação médica. Sua habilidade é consolidar múltiplas análises técnicas em um sumário claro, objetivo e clinicamente útil.""",
+    verbose=True,
+    allow_delegation=False,
+    llm=llm
+)
 
-    # Converte o histórico da conversa para um formato de string que a Task entenda
-    contexto_conversa = "\n".join([f"{msg['role']}: {msg['content']}" for msg in historico_conversa])
-
-    tarefa_conversacional = Task(
-        description=f"""Continue esta conversa de forma útil e segura. Aqui está o histórico até agora:
-        ---
-        {contexto_conversa}
-        ---
-        Baseado no histórico, sua função e a última mensagem do usuário, gere a próxima resposta apropriada.
-        Se o usuário acabou de cumprimentar, apresente-se e explique seu propósito.
-        Se o usuário descreveu sintomas, faça perguntas de acompanhamento (Ex: 'Há quanto tempo você tem isso?', 'A dor é constante ou vai e vem?', 'Você tem outros sintomas?').
-        Se você já coletou informações suficientes, resuma os sintomas, sugira possíveis áreas de investigação (sem diagnosticar) e recomende fortemente a busca por um especialista específico (ex: Clínico Geral, Cardiologista).
-        """,
-        agent=assistente_medico_conversacional,
-        expected_output="Uma única resposta em texto, formatada em markdown, para continuar a conversa com o usuário."
+# FUNÇÃO PRINCIPAL QUE ORQUESTRA A EQUIPE (CREW)
+def rodar_analise_completa(dados_paciente: str) -> str:
+    
+    tarefa_diagnostico = Task(
+         description=f"Com base nos dados clínicos do paciente, gerar um diagnóstico diferencial técnico e probabilístico. Dados: {dados_paciente}",
+         agent=agente_diagnostico,
+         expected_output="Uma lista de diagnósticos diferenciais com probabilidades e breves justificativas clínicas."
     )
 
-    # Para um único agente executando uma tarefa, não precisamos de um 'Crew'.
-    # Usamos diretamente o executor da tarefa.
-    resultado = assistente_medico_conversacional.execute_task(tarefa_conversacional)
+    tarefa_exames = Task(
+         description="Com base no diferencial diagnóstico, propor um plano de workup com justificativa técnica para cada exame sugerido.",
+         agent=agente_exames,
+         context=[tarefa_diagnostico],
+         expected_output="Uma seção de 'Sugestão de Workup' com a lista de exames e sua pertinência clínica."
+    )
+
+    tarefa_risco = Task(
+         description="Realizar a estratificação de risco do paciente, destacando 'red flags' e justificando o nível de urgência.",
+         agent=agente_risco,
+         context=[tarefa_diagnostico, tarefa_exames],
+         expected_output="Uma seção de 'Estratificação de Risco' com a classificação (ex: Baixo, Moderado, Alto) e os fatores que levaram a essa conclusão."
+    )
+
+    tarefa_relatorio = Task(
+         description="Consolidar todas as análises prévias em um sumário clínico estruturado, destinado a um médico.",
+         agent=agente_relator,
+         context=[tarefa_diagnostico, tarefa_exames, tarefa_risco],
+         expected_output="""Um sumário clínico em markdown com as seções:
+         1. Sumário do Caso Clínico.
+         2. Hipóteses Diagnósticas (Diferencial).
+         3. Sugestões de Workup.
+         4. Estratificação de Risco e Conduta Recomendada.
+         5. Observações (para fins de suporte à decisão)."""
+     )
     
-    print("Resposta gerada.")
-    return resultado
+    crew = Crew(
+         agents=[agente_diagnostico, agente_exames, agente_risco, agente_relator],
+         tasks=[tarefa_diagnostico, tarefa_exames, tarefa_risco, tarefa_relatorio],
+         process=Process.sequential,
+         verbose=True
+    )
+    
+    resultado_final = crew.kickoff()
+    return resultado_final
