@@ -1,0 +1,212 @@
+﻿id_caso,diagnostico_esperado,relatorio_da_ia
+1,AVC Isquêmico Agudo,"# Sumário do Caso Clínico de João Silva
+
+**Paciente:** João Silva, 68 anos.
+
+**Queixa Principal:** Início súbito de fraqueza no hemicorpo direito e disartria.
+
+**História da Doença Atual:** Apresentação com início súbito de déficit neurológico focal, caracterizado por fraqueza no hemicorpo direito (predominantemente facial), disartria e sinais de irritação piramidal à direita (reflexos exaltados, Babinski positivo).  Hipertensão arterial (PA: 180/100 mmHg) e diabetes mellitus preexistentes.
+
+**Exames Físicos:**  Hemiparesia direita, disartria, paralisia facial central direita, reflexos exaltados e sinal de Babinski positivo à direita.
+
+# Hipóteses Diagnósticas (Diferencial)
+
+1. **Acidente Vascular Cerebral Isquêmico (AVCI) na artéria cerebral média direita (Alta Probabilidade):**  A apresentação clínica é altamente sugestiva.
+
+2. **Acidente Vascular Cerebral Hemorrágico (AVCH) (Probabilidade Moderada):**  A hipertensão severa aumenta a possibilidade.  Necessário confirmação por imagem.
+
+3. **Encefalite (Probabilidade Baixa):**  Ausência de febre e natureza focal do déficit tornam menos provável.
+
+4. **Tumor Cerebral (Probabilidade Baixa):**  Instalação súbita dos sintomas torna menos provável.
+
+5. **Síndrome de Miller Fisher (Probabilidade Muito Baixa):**  Apresentação clínica incompatível.
+
+
+# Sugestões de Workup
+
+1. **Tomografia Computadorizada de Crânio sem Contraste (TC Crânio sem Contraste):**  Exame prioritário para diferenciar AVCI de AVCH.
+
+2. **Ressonância Magnética de Encéfalo com Perfusão (RM Perfusão):**  Se a TC não revelar hemorragia e suspeita de AVCI persistir, para melhor caracterização da lesão isquêmica.
+
+3. **Eletrocardiograma (ECG):**  Para detectar arritmias cardíacas, principalmente fibrilação atrial.
+
+4. **Dosagens Laboratoriais:** Hemograma completo, glicemia, coagulograma, eletrólitos séricos e marcadores inflamatórios (PCR).
+
+5. **Doppler Transcraniano (opcional):**  Avaliação da velocidade do fluxo sanguíneo cerebral (dependendo da disponibilidade e decisão médica).
+
+6. **Ressonância Magnética de Encéfalo com Contraste (RM com Contraste - se necessário):**  Avaliação mais detalhada das lesões após estabilização e confirmação de AVCI.
+
+
+# Estratificação de Risco e Conduta Recomendada
+
+**Classificação de Risco:** Alto.
+
+**Classificação de Urgência:** Emergência.
+
+**Justificativa:** Início súbito de déficit neurológico focal, hipertensão severa, diabetes mellitus e idade avançada. Necessidade de tratamento imediato para diferenciar AVCI de AVCH e iniciar tratamento específico dentro da janela terapêutica.
+
+
+**Conduta Recomendada:**  Início imediato de medidas de suporte (controle da pressão arterial, glicemia e oxigenação), realização do workup sugerido e consideração de trombólise (se indicado após exclusão de contraindicações e dentro da janela terapêutica). Internação em unidade de AVC.
+
+
+# Observações
+
+Este sumário clínico é baseado nas informações disponíveis.  Exames complementares são essenciais para confirmação diagnóstica e direcionamento do tratamento.  A hipertensão arterial severa necessita de tratamento imediato.  Avaliação cardiológica para descartar fontes de embolização."
+2,Esclerose Múltipla,"# Sumário Clínico - Mariana Costa (29 anos)
+
+**1. Sumário do Caso Clínico:**
+
+Paciente de 29 anos, apresentando início súbito de turvação visual unilateral (OD), dor à movimentação ocular, defeito pupilar aferente relativo à direita (RPD) e parestesia em ""bota"" ascendente bilateral.  Relata episódio semelhante prévio, autolimitado.  A combinação de sintomas sugere um processo neurológico agudo afetando nervos cranianos e medula espinhal, levantando suspeita de condição desmielinizante ou vasculítica.
+
+
+**2. Hipóteses Diagnósticas (Diferencial):**
+
+* **Neurite Óptica (Probabilidade: Alta - 60%):**  Altamente sugestiva devido à turvação visual unilateral, dor ocular à movimentação, RPD. A parestesia pode representar disseminação ou manifestação concomitante.  A história pregressa reforça a hipótese.
+* **Esclerose Múltipla (Probabilidade: Média - 30%):**  Episódio neurológico anterior e combinação de neurite óptica com sintomas medulares tornam esta hipótese plausível. Requer confirmação por critérios de McDonald.
+* **Síndrome de Devic (Neuromielite Óptica - Probabilidade: Baixa - 5%):**  Menos provável devido à ausência de comprometimento motor significativo.
+* **Vasculite (Probabilidade: Baixa - 3%):**  Possível, mas menos provável pela ausência de febre e outros sintomas sistêmicos.
+* **Mielopatia Cervical (Probabilidade: Baixa - 2%):**  Menos provável pela ausência de sinais motores significativos e presença de neurite óptica.
+
+
+**3. Sugestões de Workup:**
+
+* **RM de encéfalo e medula espinhal (cervical e torácica) com contraste:**  Prioritária para avaliação de lesões desmielinizantes e outras anormalidades estruturais.
+* **Potenciais Evocados Visuais (PEV):** Para avaliar a função do nervo óptico e auxiliar no diagnóstico de neurite óptica.
+* **Punção Lombar:** Considerar após RM, se houver lesões sugestivas de doença desmielinizante, para análise do líquor (pleocitose, aumento de proteínas, bandas oligoclonais).
+* **Exames laboratoriais:** Hemograma completo, VHS, PCR, ANCA (para descartar vasculite).
+
+
+**4. Estratificação de Risco e Conduta Recomendada:**
+
+**Classificação de Risco:** Alto
+**Nível de Urgência:** Emergência
+
+**Justificativa:** Início súbito de sintomas neurológicos graves, possível disseminação da doença, diagnósticos diferenciais graves (incluindo EM e neuromielite óptica), comprometimento visual e medular.  Requer investigação e tratamento imediatos para evitar sequelas irreversíveis.
+
+
+**Conduta:** Internação hospitalar para realização imediata da RM de encéfalo e medula espinhal com contraste e PEV.  Punção lombar e exames laboratoriais serão considerados após avaliação da RM.  Acompanhamento neurológico próximo é fundamental.
+
+
+**5. Observações (para fins de suporte à decisão):**
+
+A história pregressa de episódio semelhante é crucial.  A rapidez no diagnóstico e tratamento é fundamental para o prognóstico.  A interpretação dos achados deve ser integrada à avaliação clínica. Exames adicionais (p.ex., potenciais evocados somatossensoriais) podem ser considerados com base nos resultados iniciais."
+3,Doença de Parkinson,"# Sumário Clínico - Carlos Pereira, 72 anos
+
+**1. Sumário do Caso Clínico:**
+
+Paciente masculino, 72 anos, apresenta quadro clínico caracterizado por tremor de repouso unilateral, rigidez em roda denteada, bradicinesia, micrografia e marcha festinada, evoluindo progressivamente há aproximadamente um ano.  A avaliação neurológica sugere fortemente um quadro de parkinsonismo.  Não há relato de trauma craniano, infecções ou uso de medicações que possam estar relacionados à sintomatologia.
+
+**2. Hipóteses Diagnósticas (Diferencial):**
+
+* **Doença de Parkinson (DP):** Alta probabilidade (≥80%).  A combinação de sintomas motores clássicos (tremor de repouso, rigidez, bradicinesia) e sinais adicionais (micrografia, marcha festinada) aponta fortemente para este diagnóstico. A lateralidade do início é sugestiva, embora não definitiva.
+
+* **Parkinsonismo Atípico:** Baixa probabilidade (≤10%).  Ausência de características clínicas típicas, como resposta ruim à levodopa e flutuações motoras significativas.  Entretanto, deve ser considerado se houver resposta inadequada à terapia dopaminérgica.
+
+* **Outras causas de tremor de repouso (tremor essencial, efeitos colaterais medicamentosos, lesões troncoencefálicas):** Muito baixa probabilidade (≤5%).  A presença de rigidez e bradicinesia, além da ausência de história familiar de tremor essencial e outros sintomas relevantes, torna essas etiologias pouco prováveis.
+
+* **Síndromes parkinsonianas secundárias (trauma craniano, infecções, tumores, hidrocefalia de pressão normal):** Baixa probabilidade (≤5%).  A ausência de história relevante e a evolução insidiosa diminuem a probabilidade dessas etiologias.
+
+
+**3. Sugestões de Workup:**
+
+* **Ressonância Magnética de Encéfalo (RME) com e sem contraste:**  Para descartar lesões estruturais (tumores, AVCs, hidrocefalia).
+* **Avaliação neuropsicológica completa:** Para avaliar o status cognitivo e descartar demência ou outros transtornos cognitivos associados.
+* **Teste terapêutico com Levodopa:** Crucial para diferenciar DP de parkinsonismos atípicos, avaliando a resposta clínica à terapia dopaminérgica.
+* **DaTscan (SPECT de transporte de dopamina):**  Considerar em caso de dúvida diagnóstica após RME e teste com levodopa.  Ajuda a diferenciar DP de parkinsonismos atípicos pela avaliação da captação de dopamina nos gânglios basais.
+* **Exames laboratoriais básicos (hemograma completo, função renal e hepática):** Para descartar causas secundárias ou comorbidades.  EEG pode ser considerado se houver suspeita de epilepsia. Doppler transcraneano pode ser considerado, mas não é exame de primeira linha.
+
+
+**4. Estratificação de Risco e Conduta Recomendada:**
+
+* **Classificação de Risco:** Moderado
+* **Justificativa:** Alta probabilidade de DP, mas necessita investigação para descartar outras etiologias e avaliar a presença de comorbidades associadas, que podem piorar a qualidade de vida e a segurança do paciente (quedas, demência).  A idade avançada contribui para o aumento do risco.
+* **Urgência:** Prioritária. Investigação diagnóstica completa e avaliação por neurologista são recomendadas o mais breve possível para início do tratamento adequado e prevenção de complicações.
+
+
+**5. Observações:**
+
+Este sumário clínico representa uma análise probabilística baseada nos dados disponíveis.  Um exame clínico completo, incluindo anamnese detalhada e avaliação neurológica minuciosa, por neurologista experiente, é fundamental para o diagnóstico preciso e definição do plano terapêutico. A resposta à levodopa é crucial para a diferenciação entre DP e parkinsonismos atípicos.  A priorização dos exames pode ser ajustada de acordo com a avaliação clínica inicial e achados durante a investigação."
+4,Enxaqueca Crônica com Aura,"# Sumário Clínico de Ana Beatriz Lima - Cefaleia
+
+**1. Sumário do Caso Clínico:**
+
+Paciente Ana Beatriz Lima, 35 anos, apresenta quadro de cefaleia com frequência superior a 15 dias por mês, caracterizada por dor pulsátil, hemicraniana, de forte intensidade (8/10), associada a náuseas, fotofobia e fonofobia.  A dor dura de 4 a 12 horas e é precedida por aura visual (pontos brilhantes e linhas em zigue-zague) com duração de 20-30 minutos.  A paciente relata história de cefaleia desde a adolescência, com piora gradual.  O exame neurológico em período intercrítico é normal.
+
+
+**2. Hipóteses Diagnósticas (Diferencial):**
+
+* **Enxaqueca com Aura:** Alta probabilidade (>80%).  Critérios ICHD-3 compatíveis: aura visual, cefaleia pulsátil hemicraniana, fotofobia, fonofobia, náuseas, duração da cefaleia e aura.
+* **Cefaleia tensional:** Baixa probabilidade (<10%).  A descrição da dor não se encaixa no perfil típico.
+* **Migrânea basilar:** Baixa probabilidade (<5%).  Ausência de sintomas neurológicos troncoencefálicos.
+* **Tumor cerebral:** Muito baixa probabilidade (<2%).  Ausência de sintomas neurológicos focais persistentes e exame neurológico normal.
+* **AVC:** Muito baixa probabilidade (<1%).  Ausência de déficits neurológicos focais persistentes e aura reversível.
+
+
+**3. Sugestões de Workup:**
+
+* **Ressonância Magnética de Encéfalo (RNM):**  Para descartar lesões estruturais (tumores, MAVs, etc.).  Urgência moderada; agendamento nos próximos dias.
+* **Exames Laboratoriais:**  Não recomendados como rotina, a menos que surjam sintomas atípicos (ex: febre, rigidez nucal).  Considerar hemograma completo, PCR, VHS, glicemia, eletrólitos séricos e líquor caso necessário.
+* **Diário Cefaléico:**  Iniciar imediatamente para monitorar a frequência, intensidade e características das crises, auxiliar no tratamento e identificar gatilhos.
+
+
+**4. Estratificação de Risco e Conduta Recomendada:**
+
+* **Classificação de Risco:** Moderado.
+* **Nível de Urgência:** Prioritária (investigação complementar importante, apesar da alta probabilidade de enxaqueca).
+* **Red Flags:**  Frequência das crises (>15 dias/mês), intensidade da dor (8/10), possibilidade remota, mas não excluída, de diagnósticos graves (tumor cerebral, AVC).
+* **Recomendações:**  Solicitar RNM de encéfalo (urgência moderada), iniciar diário cefaléico, tratar a dor com analgésicos/antimigranosos, avaliar necessidade de profilaxia (considerando a frequência e intensidade das crises).
+
+
+**5. Observações (para fins de suporte à decisão):**
+
+A alta probabilidade de enxaqueca com aura não elimina a necessidade de investigação complementar para descartar patologias graves.  A frequência e a intensidade das crises justificam abordagem multidisciplinar, incluindo avaliação para tratamento preventivo e medidas de alívio sintomático. O manejo deve ser individualizado e baseado na resposta ao tratamento.  O médico assistente deve avaliar a urgência do atendimento e os exames a serem realizados, considerando este sumário como guia para tomada de decisão."
+5,Miastenia Gravis,"# Sumário do Caso Clínico
+
+Paciente Lúcia Fernandes, 42 anos, apresenta-se com ptose palpebral bilateral, diplopia, fadiga muscular generalizada e disfagia para sólidos. Os sintomas pioram ao final do dia e após esforço, e melhoram com o repouso.  A paciente possui histórico prévio de hipotireoidismo controlado com levotiroxina.  O exame físico inicial não revelou outros sinais neurológicos focais além dos sintomas descritos.
+
+# Hipóteses Diagnósticas (Diferencial)
+
+1. **Miastenia Gravis (MG):** Probabilidade Alta (70-80%).  A apresentação clínica é altamente sugestiva, com ptose flutuante, diplopia, fadiga muscular generalizada e disfagia para sólidos, todos piores ao final do dia e com esforço.  A melhora com o repouso também é característica.
+
+2. **Síndrome de Lambert-Eaton (LEMS):** Probabilidade Baixa (10-15%). Apresentação clínica menos compatível, com a fraqueza bulbar e facial mais proeminente que a fraqueza proximal dos membros.  Ausência de informação sobre neoplasias na HMP.
+
+3. **Oftalmoplegia Crônica Progressiva (OCP):** Probabilidade Baixa (5-10%). A ausência de progressão crônica e a fatigabilidade muscular falam contra este diagnóstico.
+
+4. **Miopatias inflamatórias:** Probabilidade Baixa (5-10%).  A apresentação clínica não é típica, faltando rash cutâneo, alterações na CK sérica ou outros achados sugestivos.
+
+5. **Efeitos colaterais da Levotiroxina:** Probabilidade Baixa (<5%).  A apresentação clínica, com ptose flutuante, fadiga muscular seletiva e diplopia, é incomum para o hipotireoidismo.
+
+# Sugestões de Workup
+
+A investigação deve priorizar a confirmação ou exclusão de Miastenia Gravis, dada a alta probabilidade clínica.
+
+1. **Teste do Edrofônio:** Avaliar a resposta à inibição da acetilcolinesterase.  Resultado positivo fortemente sugere MG, mas resultado negativo não a exclui.
+
+2. **Eletromiografia (EMG) com estimulação nervosa repetitiva:**  Exame eletrofisiológico crucial para diagnóstico de MG, mostrando decréscimo na amplitude dos potenciais de ação muscular em MG.  Diferencia MG de LEMS.
+
+3. **Dosagem de anticorpos:** Anti-AChR (MG), anti-MuSK (MG seronegativa), anti-VGCC (LEMS). Confirmação sorológica da doença autoimune.
+
+4. **Tomografia Computadorizada de Tórax de Alta Resolução (TCAR):** Considerar apenas se houver suspeita clínica ou eletrofisiológica de LEMS, para investigar neoplasia associada.
+
+5. **Biópsia Muscular:** Considerar se os exames anteriores forem inconclusivos, para diferenciar MG, LEMS ou miopatias inflamatórias.
+
+
+# Estratificação de Risco e Conduta Recomendada
+
+**Classificação de Risco:** Alto
+**Urgência:** Emergência
+
+**Justificativa:**  A apresentação clínica sugere Miastenia Gravis, condição com potencial risco de vida devido à possibilidade de crises miastênicas (respiratórias). A disfagia para sólidos aumenta o risco de aspiração.
+
+**Recomendações:**
+
+* Internação hospitalar imediata para monitorização clínica e tratamento.
+* Teste do Edrofônio imediato.
+* Iniciar investigação completa (EMG, anticorpos).
+* Monitorização respiratória próxima.
+* Preparação para suporte ventilatório se necessário.
+* Iniciar tratamento com imunomoduladores após confirmação diagnóstica.
+
+# Observações
+
+A sequência de exames pode variar.  A interpretação deve integrar os resultados com o quadro clínico. O hipotireoidismo prévio deve ser considerado, mas não descarta MG.  A gravidade potencial da MG justifica a urgência da investigação e do tratamento."
